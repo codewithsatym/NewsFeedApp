@@ -1,13 +1,13 @@
-package com.code.NewsFeedApp;
+package code.app.NewsFeed;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NewsFeedAppApplication {
+public class NewsFeedApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NewsFeedAppApplication.class, args);
+		SpringApplication.run(NewsFeedApplication.class, args);
 	}
 
 }
