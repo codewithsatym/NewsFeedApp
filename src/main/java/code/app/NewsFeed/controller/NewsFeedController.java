@@ -10,7 +10,7 @@ import javax.validation.ValidationException;
 
 
 @RestController
-public class NewFeedController {
+public class NewsFeedController {
 
 
     @PostMapping("/news/feed")
