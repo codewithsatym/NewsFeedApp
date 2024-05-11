@@ -1,4 +1,4 @@
-package com.code.NewsFeedApp.config;
+package code.app.NewsFeed.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,19 +16,20 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("new-feed-api ")
-                .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.code.NewsFeedApp.controller"))
+                .apis(RequestHandlerSelectors.basePackage("code.app.NewsFeed"))
                 .paths(PathSelectors.any())
+                .build().apiInfo(metaData());
+    }
+
+    private ApiInfo metaData() {
+        return new ApiInfoBuilder()
+                .title("Interface - Spring Boot Swagger Configuration")
+                .description("\"Swagger configuration for application \"")
+                .version("1.1.0")
+                .license("Apache 2.0")
+                .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")
                 .build();
     }
 
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("News Feed API")
-                .description("Spring Boot Rest API")
-                .version("1.0")
-                .build();
-    }
 }
