@@ -12,7 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.ValidationException;
+import java.time.LocalDate;
 
 
 @RestController
@@ -28,9 +28,21 @@ public class NewsFeedController {
 
     @Operation(summary = "Get EveryThing api")
     @GetMapping("/get-everything/{keyId}")
-    public ResponseEntity<JsonNode> getEveryThing(@PathVariable Long keyId, @RequestBody RequestEverythingDTO dto) throws ValidationException {
-        JsonNode everyThingNewsFeed = everythingFeedHandler.getEveryThingNewsFeed(dto,keyId);
-        return new ResponseEntity<>(everyThingNewsFeed,HttpStatus.OK);
+    public ResponseEntity<JsonNode> getEveryThing(
+            @PathVariable Long keyId,
+            @RequestParam String filterBy,
+            @RequestParam(required = false) LocalDate from_time,
+            @RequestParam(required = false) String sort_by) {
+        RequestEverythingDTO requestDTO = getRequestDTO(filterBy, from_time, sort_by);
+        return new ResponseEntity<>(everythingFeedHandler.getEveryThingNewsFeed(requestDTO, keyId),HttpStatus.OK);
     }
 
+    private RequestEverythingDTO getRequestDTO(String filterBy,
+                                               LocalDate from_time, String sort_by) {
+        RequestEverythingDTO dto = new RequestEverythingDTO();
+        dto.setFilterBy(filterBy);
+        dto.setFromTime(from_time);
+        dto.setSortBy(sort_by);
+        return dto;
+    }
 }
