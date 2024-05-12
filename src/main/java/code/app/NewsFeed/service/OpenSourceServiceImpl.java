@@ -6,7 +6,6 @@ import code.app.NewsFeed.repository.KeyRepository;
 import code.app.NewsFeed.utils.CommonUtils;
 import code.app.NewsFeed.utils.HttpGateway;
 import code.app.NewsFeed.utils.ValidationException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
