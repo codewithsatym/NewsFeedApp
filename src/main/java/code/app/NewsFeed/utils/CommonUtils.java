@@ -8,11 +8,12 @@ import java.time.LocalDate;
 
 @Component
 public class CommonUtils {
-    public StandardRequestDTO getStandardRequestDTO(String filterBy, LocalDate fromTime, String sortBy) {
+    public StandardRequestDTO getStandardRequestDTO(String filterBy, LocalDate fromTime, String sortBy, String country) {
         StandardRequestDTO dto = new StandardRequestDTO();
         dto.setFilterBy(filterBy);
         dto.setFromTime(fromTime);
         dto.setSortBy(sortBy);
+        dto.setCountry(country);
         return dto;
     }
 

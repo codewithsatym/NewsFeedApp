@@ -39,13 +39,13 @@ public class NewsFeedController {
             @RequestParam(required = false) LocalDate from_time,
             @RequestParam(required = false) Long keyId,
             @RequestParam(required = false) String sort_by) {
-        StandardRequestDTO requestDTO = getEveryThingRequest(filterBy, from_time, sort_by);
+        StandardRequestDTO requestDTO = getStandardRequestDTO(filterBy, from_time, sort_by, null);
         return new ResponseEntity<>(openSourceService.getEveryNews(requestDTO, Optional.ofNullable(keyId)), HttpStatus.OK);
     }
 
-    private StandardRequestDTO getEveryThingRequest(String filterBy,
-                                                    LocalDate from_time, String sort_by) {
-        return commonUtils.getStandardRequestDTO(filterBy, from_time, sort_by);
+    private StandardRequestDTO getStandardRequestDTO(String filterBy,
+                                                     LocalDate from_time, String sort_by, String country) {
+        return commonUtils.getStandardRequestDTO(filterBy, from_time, sort_by, country);
     }
 
     @Operation(summary = "Get EveryThing api")
@@ -53,13 +53,7 @@ public class NewsFeedController {
     public ResponseEntity<JsonNode> getEveryThing(
             @RequestParam String country,
             @RequestParam(required = false) Long keyId) {
-        StandardRequestDTO requestDTO = getTopHeadlineRequestDTO(country);
+        StandardRequestDTO requestDTO = getStandardRequestDTO(null, null, null, country);
         return new ResponseEntity<>(openSourceService.getTopHeadLines(requestDTO, Optional.ofNullable(keyId)), HttpStatus.OK);
-    }
-
-    private StandardRequestDTO getTopHeadlineRequestDTO(String country) {
-        StandardRequestDTO standardRequestDTO = new StandardRequestDTO();
-        standardRequestDTO.setCountry(country);
-        return standardRequestDTO;
     }
 }
