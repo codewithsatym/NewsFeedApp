@@ -13,8 +13,6 @@ public class RequestEverythingDTO {
     private LocalDate fromTime;
     @JsonProperty("sort_by")
     private String sortBy;
-    @JsonProperty("base_url")
-    private String base_url;
 
     public String getFilterBy() {
         return filterBy;
@@ -38,13 +36,5 @@ public class RequestEverythingDTO {
 
     public void setSortBy(String sortBy) {
         this.sortBy = sortBy;
-    }
-
-    public String getBase_url() {
-        return base_url;
-    }
-
-    public void setBase_url(String base_url) {
-        this.base_url = base_url;
     }
 }
