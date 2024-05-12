@@ -12,6 +12,7 @@ import java.util.Map;
 @Service
 public class HttpGateway {
     private HttpClient httpClient;
+
     public HttpGateway() {
         this.httpClient = HttpClients.createDefault();
     }
