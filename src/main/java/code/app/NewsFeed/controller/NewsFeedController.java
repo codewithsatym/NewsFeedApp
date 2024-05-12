@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,9 +24,9 @@ public class NewsFeedController {
 
 
     @Operation(summary = "Get EveryThing api")
-    @GetMapping("/get-everything")
-    public ResponseEntity<JsonNode> sendEmailMessage(@RequestBody RequestEverythingDTO dto) throws ValidationException {
-        JsonNode everyThingNewsFeed = everythingFeedHandler.getEveryThingNewsFeed(dto);
+    @GetMapping("/get-everything/{keyId}")
+    public ResponseEntity<JsonNode> sendEmailMessage(@PathVariable Long keyId, @RequestBody RequestEverythingDTO dto) throws ValidationException {
+        JsonNode everyThingNewsFeed = everythingFeedHandler.getEveryThingNewsFeed(dto,keyId);
         return new ResponseEntity<>(everyThingNewsFeed,HttpStatus.OK);
     }
 

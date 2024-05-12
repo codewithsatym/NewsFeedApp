@@ -7,8 +7,6 @@ import java.time.LocalDate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RequestEverythingDTO {
-    @JsonProperty("key")
-    private String key;
     @JsonProperty("filter_by")
     private String filterBy;
     @JsonProperty("from_time")
@@ -17,14 +15,6 @@ public class RequestEverythingDTO {
     private String sortBy;
     @JsonProperty("base_url")
     private String base_url;
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
 
     public String getFilterBy() {
         return filterBy;
