@@ -27,7 +27,7 @@ public class EverythingFeedHandler {
 
     public String findKeyByKeyId(Long keyId) {
         try {
-            return keyRepository.findKeyByIf(keyId);
+            return keyRepository.findKeyById(keyId);
         } catch (Exception e) {
             throw new ValidationException("Key not present for key_id " + keyId);
         }
