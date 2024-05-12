@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -55,10 +56,14 @@ public class OpenSourceServiceImpl implements OpenSourceService {
     private JsonNode getAPIResponse(String url, Map<String, String> headers) {
         return httpGateway.get(url, headers, response -> {
             int statusCode = response.getStatusLine().getStatusCode();
-            try {
-                return mapper.readTree(new String(response.getEntity().getContent().readAllBytes()));
-            } catch (IOException | UnsupportedOperationException e) {
-                throw new RuntimeException(e);
+            if (HttpStatus.valueOf(statusCode).is2xxSuccessful()) {
+                try {
+                    return mapper.readTree(new String(response.getEntity().getContent().readAllBytes()));
+                } catch (IOException | UnsupportedOperationException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                throw new ValidationException("Error getting News from Upstream Server");
             }
         });
     }
