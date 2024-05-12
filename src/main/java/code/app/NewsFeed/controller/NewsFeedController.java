@@ -43,11 +43,6 @@ public class NewsFeedController {
         return new ResponseEntity<>(openSourceService.getEveryNews(requestDTO, Optional.ofNullable(keyId)), HttpStatus.OK);
     }
 
-    private StandardRequestDTO getStandardRequestDTO(String filterBy,
-                                                     LocalDate from_time, String sort_by, String country) {
-        return commonUtils.getStandardRequestDTO(filterBy, from_time, sort_by, country);
-    }
-
     @Operation(summary = "Get EveryThing api")
     @GetMapping("/get-top-headlines")
     public ResponseEntity<JsonNode> getEveryThing(
@@ -55,5 +50,10 @@ public class NewsFeedController {
             @RequestParam(required = false) Long keyId) {
         StandardRequestDTO requestDTO = getStandardRequestDTO(null, null, null, country);
         return new ResponseEntity<>(openSourceService.getTopHeadLines(requestDTO, Optional.ofNullable(keyId)), HttpStatus.OK);
+    }
+
+    private StandardRequestDTO getStandardRequestDTO(String filterBy,
+                                                     LocalDate from_time, String sort_by, String country) {
+        return commonUtils.getStandardRequestDTO(filterBy, from_time, sort_by, country);
     }
 }
