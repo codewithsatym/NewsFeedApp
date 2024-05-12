@@ -1,10 +1,9 @@
 package code.app.NewsFeed.modal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "keys")
@@ -13,7 +12,8 @@ public class KeysModal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
+    @Column(name = "created_date")
+    private ZonedDateTime createdDate;
     @Column(name = "key")
     @JsonProperty("key")
     private String key;
@@ -32,5 +32,13 @@ public class KeysModal {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public ZonedDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(ZonedDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 }
