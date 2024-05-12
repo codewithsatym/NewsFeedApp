@@ -25,9 +25,17 @@ public class EverythingFeedHandler {
     private ObjectMapper mapper;
     @Value("${everything.url}")
     private String everyThingURL;
+    @Value("${everything.apiKey}")
+    private String apiKey;
 
-    public JsonNode getEveryThingNewsFeed(RequestEverythingDTO dto, Long keyId) {
-        String key = findKeyValueById(keyId);
+    public JsonNode getEveryThingNewsFeed(RequestEverythingDTO dto, Optional<Long> keyId) {
+        String key;
+        if (keyId.isPresent()){
+            Long id = keyId.get();
+            key = findKeyValueById(id);
+        }else {
+            key=apiKey;
+        }
 
         String url = buildURL(dto, key);
         Map<String, String> headers = new HashMap<>();

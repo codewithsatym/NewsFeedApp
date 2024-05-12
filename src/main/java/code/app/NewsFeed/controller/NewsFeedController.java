@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 
 @RestController
@@ -27,14 +28,14 @@ public class NewsFeedController {
 
 
     @Operation(summary = "Get EveryThing api")
-    @GetMapping("/get-everything/{keyId}")
+    @GetMapping("/get-everything/")
     public ResponseEntity<JsonNode> getEveryThing(
-            @PathVariable Long keyId,
             @RequestParam String filterBy,
             @RequestParam(required = false) LocalDate from_time,
+            @RequestParam(required = false) Long keyId,
             @RequestParam(required = false) String sort_by) {
         RequestEverythingDTO requestDTO = getRequestDTO(filterBy, from_time, sort_by);
-        return new ResponseEntity<>(everythingFeedHandler.getEveryThingNewsFeed(requestDTO, keyId),HttpStatus.OK);
+        return new ResponseEntity<>(everythingFeedHandler.getEveryThingNewsFeed(requestDTO, Optional.ofNullable(keyId)),HttpStatus.OK);
     }
 
     private RequestEverythingDTO getRequestDTO(String filterBy,
